@@ -188,3 +188,117 @@ Note that NarrowBeam has locked on so tightly to Crazy that he is blithely unawa
 This is the problem with NarrowBeam: other robots can still sneak up behind and he'll never know they're there. Oscillator does a little better than this by having a wider scan range, but he tends to get a little unfocused, at times.
 
 We could scan around periodically, but that would mean losing our target! What's a bot to do?
+
+## Enemy Tracking
+
+### Using the EnemyBot Class
+
+A further improvement that could be made would be to single out an individual robot, focus on him, and destroy him completely. The sample robot Tracker does this to a limited extent, but we'll do one better with the EnemyBot class you guys all wrote.
+
+To keep track of the information about an enemy robot, you first need to make a member variable in your robot like so:
+
+```java
+class MyRobot extends AdvancedRobot {
+	private EnemyBot enemy = new EnemyBot();
+	...
+```
+
+You will want to reset (clear) your enemy at the top of your run method like so:
+
+```java
+public void run() {
+	setAdjustRadarForRobotTurn(true);
+	enemy.reset();
+	while (true) {
+		setTurnRadarRight(360);
+		...
+		execute();
+	}
+}
+```
+
+And you need to update the enemy's information in the onScannedRobot method like so:
+
+```java
+public void onScannedRobot(ScannedRobotEvent e) {
+	// if we have no enemy or we found the one we're tracking..
+	if (enemy.none() || e.getName().equals(enemy.getName())) {
+		// track him!
+		enemy.update(e);
+	}
+	...
+```
+
+From this point, you can use all of the information about the enemy in any other method of your class.
+
+There is one last detail, though, if the enemy you're tracking dies, you'll want to reset it so you can track another. To do that, implement an onRobotDeath method like so:
+
+```java
+public void onRobotDeath(RobotDeathEvent e) {
+	// if the bot we were tracking died..
+	if (e.getName().equals(enemy.getName())) {
+		// clear his info, so we can track another
+		enemy.reset();
+	}
+}
+```
+
+**Sample robot:** [EnemyTracker](http://mark.random-article.com/robocode/lessons/EnemyTracker.java) - a robot that uses the EnemyBot class. Note that even though he rotates the radar, he just tracks one enemy. This allows him to keep an eye on what's going on in the rest of the battlefield while concentrating on his target.
+
+### Slightly Smarter Tracking
+
+Another small optimization could be made here: If a closer robot moves into view, we probably want to start shooting him instead. You can accomplish this by modifying your onScannedRobot method like so:
+
+```java
+public void onScannedRobot(ScannedRobotEvent e) {
+
+	if (
+		// we have no enemy, or..
+		enemy.none() ||
+		// the one we just spotted is closer, or..
+		e.getDistance() < enemy.getDistance() ||
+		// we found the one we've been tracking..
+		e.getName().equals(enemy.getName())
+		) {
+		// track him!
+		enemy.update(e);
+	}
+	...
+```
+
+And that's pretty good, but there's only one problem: if there are two equally close targets, your bot from spin back and forth between them rather indecicively.
+To solve this problem, rather than just saying
+```java
+	// the one we just spotted is closer, or..
+	e.getDistance() < enemy.getDistance() ||
+```
+
+you can instead bias the current target by saying
+
+```java
+	// the one we just spotted is _significantly_ closer, or..
+	e.getDistance() < enemy.getDistance() - 70 ||
+```
+
+which will make sure that you only pick a new target if it is decisively closer.
+
+**Sample robot:** [EnemyOrCloser](http://mark.random-article.com/robocode/lessons/EnemyOrCloser.java) uses the above scanning technique to hit the closest enemy. As he rotates his radar, he will begin tracking any enemy that is closer (even if someone sneaks up behind him).
+
+### Improved Oscillation
+
+You may be wondering how to wobble the scanner outside of the onScannedRobot method (rather than rotating). Here's how you can do it:
+
+```java
+double turn = getHeading() - getRadarHeading() + enemy.getBearing();
+turn += 30 * scanDirection;
+setTurnRadarRight(turn);
+scanDirection *= -1;
+```
+
+Feel free to experiment with offset values other than 30.
+
+**Sample robot:** [ImprovedOscillator](http://mark.random-article.com/robocode/lessons/ImprovedOscillator.java) - Note how this bot creates a perfect cone around the robot you are tracking. The disadvantage is that ImprovedOscillator can still be blindsided a la NarrowBeam.
+
+# Assignment Part III: Improve your Tracking 
+
+1. Have your robot use the EnemyBot class to track enemies better.
