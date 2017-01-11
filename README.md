@@ -124,3 +124,50 @@ public void onScannedRobot(ScannedRobotEvent e) {
 Flipping the value of `scanDirection` creates the oscillating effect.
 
 Sample robot: [Oscillator](http://mark.random-article.com/robocode/lessons/Oscillator.java) - wobbles his radar to keep track of his opponent. Note that while he tends to track an enemy, he'll chase others that are nearby, too.
+
+# Assignment Part I: Add scanning to your bot
+
+1. Convert your robot from a `Robot` to an `AdvancedRobot`
+2. Add some scanning code, either the Narrow Beam or Oscillating technique. 
+
+# Assignment Part II: Create EnemyBot class
+
+Now we are going to create an EnemyBot that you are going to use to test your scanning abilities. You may find the following information useful. These are links to Sun's online Java tutorials.
+
+[What Is a Class?](http://java.sun.com/docs/books/tutorial/java/concepts/class.html) - very basic primer on class basics
+[Creating Classes](http://java.sun.com/docs/books/tutorial/java/javaOO/classes.html) - the main components of a class
+
+## Specifications
+
+Write a class that can hold the information about an enemy robot.
+
+### Detail
+
+1. In Robocode, go to Source Editor and create a new Java file called "EnemyBot.java". You will most likely have to change the name of the class to match the filename. Make sure this file is in the same package as your other robots
+2. Add `import robocode.*` right under your package declaration.
+2. Add the following private variables to the class: bearing, distance, energy, heading, name, velocity. All of these will be of type double except for name which will be of type String. These are the attributes for your EnemyBot
+3. Implement a public constructor which just calls the reset function(You haven't written the reset function yet, but you will in the next step). Note: the constructor must be the same name as the class. Also, constructors never specify a return value.
+4. Implement another state-change method called reset which sets the name variable to the empty string ("") and all the variables of type double to 0.0. The reset method will also return void.
+5. Implement a state-change method called update which takes a [ScannedRobotEvent](http://mark.random-article.com/robocode/javadoc/robocode/ScannedRobotEvent.html) as a parameter. Call the ScannedRobotEvent's methods (same names as the ones in step #3) to set your private variables (step #2). The update method will return void.
+6. Add the following public accessor methods to the class: getBearing(), getDistance(), getEnergy(), getHeading(), getName(), getVelocity(). These will all return the values in the private variables.
+7. Implement a (state-reporting) accessor method called none which will return true if name is "" or false otherwise. (Remember to use the equals() method of the String class.) Basically, this method will return true if the reset method was just called.
+ 
+Layout of the code
+
+Kindly lay out your code like so:
+
+```java
+public class EnemyBot {
+
+	// private data (attributes)
+
+	// constructor
+
+	// mutator methods (reset & update) 
+
+	// accessor methods (get*)
+
+	// state methods (none) 
+
+}
+```
