@@ -176,11 +176,12 @@ public class EnemyBot {
 
 Now you will use your Enemybot class to improve your scanning techniques
 
-The Problem with NarrowBeam
+## The Problem with NarrowBeam
 
 A recurring theme in the computer industry is that the solution to one problem leads to the creation of another. Fittingly, having solved the problem of how to lock onto a target, we are now faced with another problem, which the following screenshot illustrates:
 
-
+![Image of NarrowBeam]
+(http://mark.random-article.com/robocode/narrow_beam.jpg)
 
 Note that NarrowBeam has locked on so tightly to Crazy that he is blithely unaware that Tracker is killing him from behind.
 
