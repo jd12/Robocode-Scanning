@@ -76,3 +76,51 @@ Important Note: If you make a robot derived from AdvancedRobot, you must call th
 
 But AdvancedBearingBot has another large defect which you can see if you match him up against more than one opponent: he goes driving all over the battlefield chasing one robot after another and doesn't get a lot accomplished. This is because his radar keeps scanning robots, and he chases every one he scans. In short, he lacks focus.
 
+
+# Locking Onto an Enemy
+
+## Narrow Beam
+
+We can easily lock onto our opponent by constantly turning the radar toward him whenever we scan him. Intuatively, you might think of doing something with the scanned robot's bearing like so:
+```java
+    public void onScannedRobot(ScannedRobotEvent e) {
+		// Lock on to our target (I hope...)
+		 setTurnRadarRight(e.getBearing());
+		 ...
+```
+There's a problem with this, though: the `ScannedRobotEvent` gives us a bearing to the scanned robot but it is relative to our tank's position, not our radar's position. How do we resolve this little quandry?
+
+Easy: we find the difference between our tank heading ([getHeading()](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#getHeading())) and our radar heading ([getRadarHeading()](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#getRadarHeading())) and add the bearing to the scanned robot ([e.getBearing()](http://mark.random-article.com/robocode/javadoc/robocode/ScannedRobotEvent.html#getBearing())), like so:
+```java
+    public void onScannedRobot(ScannedRobotEvent e) {
+		// Lock on to our target (this time for sure)
+		setTurnRadarRight(getHeading() - getRadarHeading() + e.getBearing());
+		...
+```
+Sample robot: [NarrowBeam](http://mark.random-article.com/robocode/lessons/NarrowBeam.java) - Uses the above source to lock onto an opponent and nail him. Match him up against as many opponents as you want.
+
+## Oscillating (or "Wobbling") the Radar
+
+An alternative technique is to oscillate your radar. Every time you see an opponent, you whipsaw the radar back so as to focus on one robot and continuously generate scan events. This is an improvement over the narrow beam because you are a little more aware of nearby robots.
+
+To make this work, you need a variable that keeps track of which direction to turn the radar, it will only ever have values of 1 and -1, so it can be small. You can declare it in your robot like so:
+
+```java
+class MyRobot extends AdvancedRobot {
+	private byte scanDirection = 1;
+	...
+```
+
+The run method can look just like the one above, but in the onScannedRobot method you do the following:
+
+```java
+public void onScannedRobot(ScannedRobotEvent e) {
+	...
+	scanDirection *= -1; // changes value from 1 to -1
+	setTurnRadarRight(360 * scanDirection);
+	...
+```
+
+Flipping the value of `scanDirection` creates the oscillating effect.
+
+Sample robot: [Oscillator](http://mark.random-article.com/robocode/lessons/Oscillator.java) - wobbles his radar to keep track of his opponent. Note that while he tends to track an enemy, he'll chase others that are nearby, too.
