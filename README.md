@@ -171,3 +171,19 @@ public class EnemyBot {
 
 }
 ```
+
+# Part III: Improve your Scanning 
+
+Now you will use your Enemybot class to improve your scanning techniques
+
+The Problem with NarrowBeam
+
+A recurring theme in the computer industry is that the solution to one problem leads to the creation of another. Fittingly, having solved the problem of how to lock onto a target, we are now faced with another problem, which the following screenshot illustrates:
+
+
+
+Note that NarrowBeam has locked on so tightly to Crazy that he is blithely unaware that Tracker is killing him from behind.
+
+This is the problem with NarrowBeam: other robots can still sneak up behind and he'll never know they're there. Oscillator does a little better than this by having a wider scan range, but he tends to get a little unfocused, at times.
+
+We could scan around periodically, but that would mean losing our target! What's a bot to do?
