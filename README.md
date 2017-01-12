@@ -138,7 +138,7 @@ Now we are going to create an EnemyBot that you are going to use to test your sc
 
 [Creating Classes](http://java.sun.com/docs/books/tutorial/java/javaOO/classes.html) - the main components of a class
 
-[Data Types] (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) 
+[Data Types] (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) - information on primitive data types
 
 ## Specifications
 
