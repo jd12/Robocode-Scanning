@@ -103,7 +103,7 @@ Sample robot: [NarrowBeam](http://mark.random-article.com/robocode/lessons/Narro
 
 An alternative technique is to oscillate your radar. Every time you see an opponent, you whipsaw the radar back so as to focus on one robot and continuously generate scan events. This is an improvement over the narrow beam because you are a little more aware of nearby robots.
 
-To make this work, you need a variable that keeps track of which direction to turn the radar, it will only ever have values of 1 and -1, so it can be small. You can declare it in your robot like so:
+To make this work, you need a variable that keeps track of which direction to turn the radar, it will only ever have values of 1 and -1, so it can be small. You can learn more about different data types [here] (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html). You can declare it in your robot like so:
 
 ```java
 class MyRobot extends AdvancedRobot {
@@ -135,7 +135,10 @@ Sample robot: [Oscillator](http://mark.random-article.com/robocode/lessons/Oscil
 Now we are going to create an EnemyBot that you are going to use to test your scanning abilities. You may find the following information useful. These are links to Sun's online Java tutorials.
 
 [What Is a Class?](http://java.sun.com/docs/books/tutorial/java/concepts/class.html) - very basic primer on class basics
+
 [Creating Classes](http://java.sun.com/docs/books/tutorial/java/javaOO/classes.html) - the main components of a class
+
+[Data Types] (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) 
 
 ## Specifications
 
