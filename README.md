@@ -11,14 +11,14 @@ We'll begin this lesson by discussing your robot's senses. It has only a few.
 Your robot knows when it's:
 
 1. hit a wall ([onHitWall](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onHitWall(robocode.HitWallEvent))),
-2. been hit by a bullet ([onHitByBullet](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onHitByBullet(robocode.HitByBulletEvent))),
-3. or hit another robot ([onHitRobot](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onHitRobot(robocode.HitRobotEvent))).
+2. been hit by a bullet ([onHitByBullet](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onHitByBullet(robocode.HitByBulletEvent))),
+3. or hit another robot ([onHitRobot](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onHitRobot(robocode.HitRobotEvent))).
 
 All of these methods pass you events that give you information about what you touched. (See the links to the on-line docs, above.)
 
 ### Sense of Sight
 
-Your robot knows when it's seen another robot, but only if it scans it ([onScannedRobot](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onScannedRobot(robocode.ScannedRobotEvent))).
+Your robot knows when it's seen another robot, but only if it scans it ([onScannedRobot](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onScannedRobot(robocode.ScannedRobotEvent))).
 
 Scan events are arguably the most important of all events. Scan events give you information about the other robots on the battlefield. (Some robots put 90+% of their code in the onScannedRobot method.) The only way scan events can be generated (practically speaking) is if you move your radar. (If an enemy robot wanders in front of your radar it will generate a scan event, but you should really take a more proactive stance.)
 
@@ -28,9 +28,9 @@ If you want to, you can make the robots' scan arcs visible by selecting Options 
 
 ## Other Senses
 
-Your robot also knows when he's died ([onDeath](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onDeath(robocode.DeathEvent))), when another robot has died ([onRobotDeath](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onRobotDeath(robocode.RobotDeathEvent))), or when he's won the round ([onWin](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onWin(robocode.WinEvent)) -- this is where you write the code for your victory dance. Side note: if you want to test your victory dance, you can start the round with just one bot: yours).
+Your robot also knows when he's died ([onDeath](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onDeath(robocode.DeathEvent))), when another robot has died ([onRobotDeath](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onRobotDeath(robocode.RobotDeathEvent))), or when he's won the round ([onWin](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onWin(robocode.WinEvent)) -- this is where you write the code for your victory dance. Side note: if you want to test your victory dance, you can start the round with just one bot: yours).
 
-Your robot also is aware of his bullets and knows when a bullet has hit an opponent ([onBulletHit](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onBulletHit(robocode.BulletHitEvent))), when a bullet hits a wall ([onBulletMissed](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onBulletMissed(robocode.BulletMissedEvent))), when a bullet hits another bullet ([onBulletHitBullet](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onBulletHitBullet(robocode.BulletHitBulletEvent))).
+Your robot also is aware of his bullets and knows when a bullet has hit an opponent ([onBulletHit](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onBulletHit(robocode.BulletHitEvent))), when a bullet hits a wall ([onBulletMissed](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onBulletMissed(robocode.BulletMissedEvent))), when a bullet hits another bullet ([onBulletHitBullet](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onBulletHitBullet(robocode.BulletHitBulletEvent))).
 
 # Building A Better Robot
 
@@ -46,7 +46,7 @@ public void run() {
 	}
 }
 ```
-(Note that we call [setAdjustRadarForRobotTurn(true)](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#setAdjustRadarForRobotTurn(boolean)) so as to have radar movement independent from gun movement.)
+(Note that we call [setAdjustRadarForRobotTurn(true)](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#setAdjustRadarForRobotTurn(boolean)) so as to have radar movement independent from gun movement.)
 
 Indeed, our beloved BearingBot from earlier did exactly that: he rotates his radar and moves closer to whoever he scans.
 
@@ -54,7 +54,7 @@ You may have noticed that BearingBot has a large defect that you can see if you 
 
 ## Compound Movements with the AdvancedRobot Class
 
-It would be great if we could do more than one thing at once (scan AND turn AND fire). Thankfully, the powers that be have provided us with a means to accomplish this: The [AdvancedRobot](http://mark.random-article.com/robocode/javadoc/robocode/AdvancedRobot.html) base class, which allows us to make non-blocking calls to move the robot and then executes them all as a compound action. Crazy and SpinBot (and oddly enough SittingDuck) are all examples of advanced robots.
+It would be great if we could do more than one thing at once (scan AND turn AND fire). Thankfully, the powers that be have provided us with a means to accomplish this: The [AdvancedRobot](http://jd12.github.io/RobocodeInitial/robocode/AdvancedRobot.html) base class, which allows us to make non-blocking calls to move the robot and then executes them all as a compound action. Crazy and SpinBot (and oddly enough SittingDuck) are all examples of advanced robots.
 
 To change your robot to an advanced robot, just change your class declaration from:
 ```java
@@ -90,7 +90,7 @@ We can easily lock onto our opponent by constantly turning the radar toward him 
 ```
 There's a problem with this, though: the `ScannedRobotEvent` gives us a bearing to the scanned robot but it is relative to our tank's position, not our radar's position. How do we resolve this little quandry?
 
-Easy: we find the difference between our tank heading ([getHeading()](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#getHeading())) and our radar heading ([getRadarHeading()](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#getRadarHeading())) and add the bearing to the scanned robot ([e.getBearing()](http://mark.random-article.com/robocode/javadoc/robocode/ScannedRobotEvent.html#getBearing())), like so:
+Easy: we find the difference between our tank heading ([getHeading()](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#getHeading())) and our radar heading ([getRadarHeading()](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#getRadarHeading())) and add the bearing to the scanned robot ([e.getBearing()](http://jd12.github.io/RobocodeInitial/robocode/ScannedRobotEvent.html#getBearing())), like so:
 ```java
     public void onScannedRobot(ScannedRobotEvent e) {
 		// Lock on to our target (this time for sure)
@@ -151,7 +151,7 @@ Write a class that can hold the information about an enemy robot.
 3. Add the following private variables to the class: bearing, distance, energy, heading, name, velocity. All of these will be of type double except for name which will be of type String. These are the attributes for your EnemyBot
 4. Implement a public constructor which just calls the reset function(You haven't written the reset function yet, but you will in the next step). Note: the constructor must be the same name as the class. Also, constructors never specify a return value.
 5. Implement another state-change method called reset which sets the name variable to the empty string ("") and all the variables of type double to 0.0. The reset method will also return void.
-6. Implement a state-change method called update which takes a [ScannedRobotEvent](http://mark.random-article.com/robocode/javadoc/robocode/ScannedRobotEvent.html) as a parameter. Call the ScannedRobotEvent's methods (same names as the ones in step #7) to set your private variables (step #3). The update method will return void.
+6. Implement a state-change method called update which takes a [ScannedRobotEvent](http://jd12.github.io/RobocodeInitial/robocode/ScannedRobotEvent.html) as a parameter. Call the ScannedRobotEvent's methods (same names as the ones in step #7) to set your private variables (step #3). The update method will return void.
 7. Add the following public accessor methods to the class: getBearing(), getDistance(), getEnergy(), getHeading(), getName(), getVelocity(). These will all return the values in the private variables.
 8. Implement a (state-reporting) accessor method called none which will return true if name is "" or false otherwise. (Remember to use the equals() method of the String class.) Basically, this method will return true if the reset method was just called.
  
