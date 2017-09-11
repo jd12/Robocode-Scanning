@@ -10,7 +10,7 @@ We'll begin this lesson by discussing your robot's senses. It has only a few.
 
 Your robot knows when it's:
 
-1. hit a wall ([onHitWall](http://jd12.github.io/RobocodeInitial/Robot.html#onHitWall(robocode.HitWallEvent))),
+1. hit a wall ([onHitWall](http://jd12.github.io/RobocodeInitial/robocode/Robot.html#onHitWall(robocode.HitWallEvent))),
 2. been hit by a bullet ([onHitByBullet](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onHitByBullet(robocode.HitByBulletEvent))),
 3. or hit another robot ([onHitRobot](http://mark.random-article.com/robocode/javadoc/robocode/Robot.html#onHitRobot(robocode.HitRobotEvent))).
 
