@@ -68,9 +68,9 @@ class MyRobot extends AdvancedRobot {
 ```
 Now you're inheriting from `AdvancedRobot` rather than `Robot`; now you can use the set* methods provided by the AdvancedRobot class. (We will discuss more about inheritance later.)
 
-Sample robot: [AdvancedBearingBot](http://mark.random-article.com/robocode/lessons/AdvancedBearingBot.java) - A great improvement over 'BearingBot', because he can do compound movements.
+Sample robot: [AdvancedBearingBot](./sampleBots/AdvancedBearingBot.java) - A great improvement over 'BearingBot', because he can do compound movements.
 
-Sample robot: [AdvancedTracker](http://mark.random-article.com/robocode/lessons/AdvancedTracker.java) - This is a modification of the 'Tracker' sample robot. Per the source code for Tracker, notice how much he improves when you turn him into an AdvancedRobot.
+Sample robot: [AdvancedTracker](./sampleBots/AdvancedTracker.java) - This is a modification of the 'Tracker' sample robot. Per the source code for Tracker, notice how much he improves when you turn him into an AdvancedRobot.
 
 Important Note: If you make a robot derived from AdvancedRobot, you must call the `execute()` method to perform all the queued-up actions. If you forget to do that, your bot will become disabled. You can click on your bot's button on the right to see the error message from the system.
 
@@ -97,13 +97,13 @@ Easy: we find the difference between our tank heading ([getHeading()](http://jd1
 		setTurnRadarRight(getHeading() - getRadarHeading() + e.getBearing());
 		...
 ```
-Sample robot: [NarrowBeam](http://mark.random-article.com/robocode/lessons/NarrowBeam.java) - Uses the above source to lock onto an opponent and nail him. Match him up against as many opponents as you want.
+Sample robot: [NarrowBeam](./sampleBots/NarrowBeam.java) - Uses the above source to lock onto an opponent and nail him. Match him up against as many opponents as you want.
 
 ## Oscillating (or "Wobbling") the Radar
 
 An alternative technique is to oscillate your radar. Every time you see an opponent, you whipsaw the radar back so as to focus on one robot and continuously generate scan events. This is an improvement over the narrow beam because you are a little more aware of nearby robots.
 
-To make this work, you need a variable that keeps track of which direction to turn the radar, it will only ever have values of 1 and -1, so it can be small. You can learn more about different data types [here] (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html). You can declare it in your robot like so:
+To make this work, you need a variable that keeps track of which direction to turn the radar, it will only ever have values of 1 and -1, so it can be small. You can learn more about different data types [here](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html). You can declare it in your robot like so:
 
 ```java
 class MyRobot extends AdvancedRobot {
@@ -123,7 +123,7 @@ public void onScannedRobot(ScannedRobotEvent e) {
 
 Flipping the value of `scanDirection` creates the oscillating effect.
 
-Sample robot: [Oscillator](http://mark.random-article.com/robocode/lessons/Oscillator.java) - wobbles his radar to keep track of his opponent. Note that while he tends to track an enemy, he'll chase others that are nearby, too.
+Sample robot: [Oscillator](./sampleBots/Oscillator.java) - wobbles his radar to keep track of his opponent. Note that while he tends to track an enemy, he'll chase others that are nearby, too.
 
 # Assignment Part I: Add scanning to your bot
 
@@ -245,7 +245,7 @@ public void onRobotDeath(RobotDeathEvent e) {
 }
 ```
 
-**Sample robot:** [EnemyTracker](http://mark.random-article.com/robocode/lessons/EnemyTracker.java) - a robot that uses the EnemyBot class. Note that even though he rotates the radar, he just tracks one enemy. This allows him to keep an eye on what's going on in the rest of the battlefield while concentrating on his target.
+**Sample robot:** [EnemyTracker](./sampleBots/EnemyTracker.java) - a robot that uses the EnemyBot class. Note that even though he rotates the radar, he just tracks one enemy. This allows him to keep an eye on what's going on in the rest of the battlefield while concentrating on his target.
 
 ### Slightly Smarter Tracking
 
@@ -284,7 +284,7 @@ you can instead bias the current target by saying
 
 which will make sure that you only pick a new target if it is decisively closer.
 
-**Sample robot:** [EnemyOrCloser](http://mark.random-article.com/robocode/lessons/EnemyOrCloser.java) uses the above scanning technique to hit the closest enemy. As he rotates his radar, he will begin tracking any enemy that is closer (even if someone sneaks up behind him).
+**Sample robot:** [EnemyOrCloser](./sampleBots/EnemyOrCloser.java) uses the above scanning technique to hit the closest enemy. As he rotates his radar, he will begin tracking any enemy that is closer (even if someone sneaks up behind him).
 
 ### Improved Oscillation
 
@@ -299,7 +299,7 @@ scanDirection *= -1;
 
 Feel free to experiment with offset values other than 30.
 
-**Sample robot:** [ImprovedOscillator](http://mark.random-article.com/robocode/lessons/ImprovedOscillator.java) - Note how this bot creates a perfect cone around the robot you are tracking. The disadvantage is that ImprovedOscillator can still be blindsided a la NarrowBeam.
+**Sample robot:** [ImprovedOscillator](./sampleBots/ImprovedOscillator.java) - Note how this bot creates a perfect cone around the robot you are tracking. The disadvantage is that ImprovedOscillator can still be blindsided a la NarrowBeam.
 
 # Assignment Part III: Improve your Tracking 
 
